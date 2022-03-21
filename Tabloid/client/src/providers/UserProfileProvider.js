@@ -5,6 +5,8 @@ import { Spinner } from "reactstrap";
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
+  //user state holds list of users from API
+  const [userProfiles, setUserProfiles] = useState([])
 
   const apiUrl = "https://localhost:44360";
 
@@ -47,12 +49,15 @@ export function UserProfileProvider(props) {
       });
   };
 
-
-
+  const getAllUsers = () => {
+    return fetch(`${apiUrl}/api/userprofile`)
+    .then((res) => res.json())
+    .then(setUserProfiles);
+  }
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register,  }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers }}>
        {props.children}
     </UserProfileContext.Provider>
   );

@@ -7,6 +7,7 @@ import {
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Hello from "./Hello";
+import UserProfileList from "./userProfile/UserProfileList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -24,6 +25,7 @@ export default function ApplicationViews() {
    return(
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/userProfiles" element={<UserProfileList />} />
       </Routes>
    );
   }
