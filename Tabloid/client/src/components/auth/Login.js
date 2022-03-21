@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useNavigate, Link } from "react-router-dom";
-import { UserProfileContext } from "../providers/UserProfileProvider";
+import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function Login() {
   const navigate = useNavigate();
