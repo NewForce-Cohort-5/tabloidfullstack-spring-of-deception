@@ -9,6 +9,7 @@ import Register from "./auth/Register";
 import Hello from "./Hello";
 import UserProfileList from "./userProfile/UserProfileList";
 import PostList from "./Post/PostList";
+import PostDetails from "./Post/PostDetails";
 
 
 export default function ApplicationViews() {
@@ -31,6 +32,7 @@ export default function ApplicationViews() {
         <Route path="/userProfiles" element={<UserProfileList />} />
 
         <Route path="/posts" element={<PostList />} />
+        <Route path="/posts/:id" element={<PostDetails />} />
 
       </Routes>
    );
