@@ -52,8 +52,13 @@ namespace Tabloid.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
+
             var user = _userRepository.GetById(id);
 
+            if (user.ImageLocation == null)
+            {
+                user.ImageLocation = "https://avatars.dicebear.com/api/bottts/.svg";
+            }
             if (user == null)
             {
                 return NotFound();
