@@ -8,6 +8,8 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Hello from "./Hello";
 import UserProfileList from "./userProfile/UserProfileList";
+import PostList from "./Post/PostList";
+
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -25,7 +27,11 @@ export default function ApplicationViews() {
    return(
       <Routes>
         <Route path="/" element={<Hello />} />
+
         <Route path="/userProfiles" element={<UserProfileList />} />
+
+        <Route path="/posts" element={<PostList />} />
+
       </Routes>
    );
   }
