@@ -49,11 +49,12 @@ namespace Tabloid.Repositories
                                     OUTPUT INSERTED.ID
                                     VALUES (@name)";
 
-                    cmd.Parameters.AddWithValue("@name", category.Name);
+                    DbUtils.AddParameter(cmd, "@Name", category.Name);
 
-                    int id = (int)cmd.ExecuteScalar();
 
-                    category.Id = id;
+                    category.Id = (int)cmd.ExecuteScalar();
+
+                    
                 }
             }
         }

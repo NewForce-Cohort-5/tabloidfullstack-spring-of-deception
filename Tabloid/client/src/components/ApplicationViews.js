@@ -9,6 +9,7 @@ import Register from "./auth/Register";
 import Hello from "./Hello";
 import { CategoryList} from "./category/CategoryList"
 import { CategoryProvider } from "../providers/CategoryProvider";
+import { CategoryForm } from "./category/CategoryForm";
 import UserProfileList from "./userProfile/UserProfileList";
 import PostList from "./Post/PostList";
 
@@ -35,6 +36,8 @@ export default function ApplicationViews() {
         <Route path="/posts" element={<PostList />} />
 
         <Route path="/category" element={<CategoryList />} />
+
+        <Route path="/category/add" element={<CategoryForm />} />
       </Routes>
    );
   }
