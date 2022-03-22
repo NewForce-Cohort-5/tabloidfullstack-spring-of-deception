@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const UserProfile = ({ userProfileProp }) => {
   
   
-  
+  //Added a default image location in case the image location comes back as null
   return (
     <>
       <Col sm="2">
