@@ -7,15 +7,14 @@ const UserProfile = ({ userProfileProp }) => {
   
   return (
     <>
-    <Col sm="3">
+    <Col sm="2">
     <Card className="profileCard">
         <CardImg top src={userProfileProp.imageLocation} alt={userProfileProp.fullName} />
       
       <CardBody>
-        <Link to={`/users/${userProfileProp.id}`}>
-        Posted by: {userProfileProp.displayName}<br />
-        Name: {userProfileProp.fullName}<br />
-        User Type: {userProfileProp.userType.name}
+        <Link to={`/userprofile/${userProfileProp.id}`}>
+        User Name: {userProfileProp.displayName}<br />
+        
         
         </Link>  
       </CardBody>

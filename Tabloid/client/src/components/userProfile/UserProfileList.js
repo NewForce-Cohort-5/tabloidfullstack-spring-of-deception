@@ -5,9 +5,9 @@ import { CardGroup, Row } from 'reactstrap';
 
 
 const UserProfileList = () => {
-
+    // const []
     //get context from userprofileprovider
-    const {userProfiles, setUserProfiles, getAllUsers} = useContext(UserProfileContext)
+    const {userProfiles, getAllUsers} = useContext(UserProfileContext)
     
     //get all profiles
     useEffect(() => {

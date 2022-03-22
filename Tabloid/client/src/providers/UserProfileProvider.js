@@ -55,9 +55,14 @@ export function UserProfileProvider(props) {
     .then(setUserProfiles);
   }
 
+  const getById = (id) => {
+    return fetch (`${apiUrl}/api/userprofile/${id}`)
+    .then((res) => res.json())    
+  }
+
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles, getById }}>
        {props.children}
     </UserProfileContext.Provider>
   );
