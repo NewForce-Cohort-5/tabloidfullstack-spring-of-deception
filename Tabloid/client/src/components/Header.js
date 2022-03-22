@@ -34,11 +34,17 @@ export default function Header() {
             {isLoggedIn &&
               <>
                 <NavItem>
+                  <NavLink tag={RRNavLink} to="/userprofiles">User Profiles</NavLink>
+                </NavItem>
+                
+                <NavItem>
                   <a aria-current="page" className="nav-link"
                     style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                 </NavItem>
+                
               </>
             }
+
             {!isLoggedIn &&
               <>
                 <NavItem>

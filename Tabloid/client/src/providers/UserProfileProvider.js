@@ -57,7 +57,7 @@ export function UserProfileProvider(props) {
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles }}>
        {props.children}
     </UserProfileContext.Provider>
   );

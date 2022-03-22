@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import UserProfile from "./UserProfile";
+import { CardGroup, Row } from 'reactstrap';
 
 
 const UserProfileList = () => {
@@ -20,17 +21,17 @@ const UserProfileList = () => {
   }
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-sm-12 col-lg-6">
-            <div>
-            {userProfiles.map((p) => (
-              <UserProfile key={p.id} userProfileProp={p} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    
+        
+        <CardGroup>
+        <Row>
+        {userProfiles.map((p) => (
+            <UserProfile key={p.id} userProfileProp={p} />
+        ))}
+        </Row>
+        </CardGroup>
+        
+     
   );
 };
 
