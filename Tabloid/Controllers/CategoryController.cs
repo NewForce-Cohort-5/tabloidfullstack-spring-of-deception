@@ -27,38 +27,39 @@ namespace Tabloid.Controllers
             return Ok(_categoryRepository.GetAllCategories());
         }
 
-    //    // GET api/<ValuesController>/5
-    //    [HttpGet("{id}")]
-    //    public IActionResult Get(int id)
-    //    {
-    //        var category = _categoryRepository.GetById(id);
-    //        if (category == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        return Ok(category);
-    //    }
+        //    // GET api/<ValuesController>/5
+        [HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    var category = _categoryRepository.GetById(id);
+        //    if (category == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(category);
+        //}
 
-    //    // POST api/<ValuesController>
-    //    [HttpPost]
-    //    public IActionResult Post(Category category)
-    //    {
-    //        _categoryRepository.Add(category);
-    //    }
+        //    // POST api/<ValuesController>
+        [HttpPost]
+        public IActionResult Post(Category category)
+        {
+            _categoryRepository.AddCategory(category);
+            return CreatedAtAction("Get", new { id = category.Id }, category);
+        }
 
-    //    // PUT api/<ValuesController>/5
-    //    [HttpPut("{id}")]
-    //    public void Put(int id, [FromBody] string value)
-    //    {
-    //        return CreatedAtAction("Get", new { id = category.Id }, category);
-        
-    //    }
+        // PUT api/<ValuesController>/5
+        [HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //    return CreatedAtAction("Get", new { id = category.Id }, category);
 
-    //    // DELETE api/<ValuesController>/5
-    //    [HttpDelete("{id}")]
-    //    public void Delete(int id)
-    //    {
-    //    }
+        //}
+
+        // DELETE api/<ValuesController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
 
 }
