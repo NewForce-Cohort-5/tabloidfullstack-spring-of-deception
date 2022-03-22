@@ -29,6 +29,13 @@ namespace Tabloid.Controllers
             return Ok(user);
         }
 
+        // GET: UserProfileController
+        [HttpGet]
+        public ActionResult Get()
+        {
+            return Ok(_userRepository.GetAll());
+        }
+
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
@@ -40,5 +47,7 @@ namespace Tabloid.Controllers
                 new { email = userProfile.Email },
                 userProfile);
         }
+
+
     }
 }
