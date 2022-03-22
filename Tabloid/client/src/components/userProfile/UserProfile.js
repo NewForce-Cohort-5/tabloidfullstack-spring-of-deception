@@ -5,22 +5,24 @@ import { Link } from "react-router-dom";
 
 const UserProfile = ({ userProfileProp }) => {
   
+  
+  
   return (
     <>
-    <Col sm="2">
-    <Card className="profileCard">
-        <CardImg top src={userProfileProp.imageLocation} alt={userProfileProp.fullName} />
-      
-      <CardBody>
-        <Link to={`/userprofile/${userProfileProp.id}`}>
-        User Name: {userProfileProp.displayName}<br />
-        
-        
-        </Link>  
-      </CardBody>
-        
-    </Card>
-    </Col>
+      <Col sm="2">
+        <Card className="profileCard">
+          <CardImg top src={userProfileProp.imageLocation || "https://avatars.dicebear.com/api/bottts/.svg"} alt={userProfileProp.name} />
+
+          <CardBody>
+            <Link to={`/userprofile/${userProfileProp.id}`}>
+              User Name: {userProfileProp.displayName}<br />
+
+
+            </Link>
+          </CardBody>
+
+        </Card>
+      </Col>
     </>
   );
 };
