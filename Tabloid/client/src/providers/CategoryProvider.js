@@ -14,7 +14,6 @@ export const CategoryProvider = (props) => {
 
 
 
-
     return (
         <CategoryContext.Provider value={{categories, getAllCategories}}>
             {props.children}
