@@ -9,11 +9,11 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.5",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "3.4.1",
-    "reactstrap": "^8.5.1"
+    "reactstrap": "^8.10.1"
   },
   "scripts": {
     "start": "react-scripts start",

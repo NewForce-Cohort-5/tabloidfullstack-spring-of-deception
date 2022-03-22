@@ -4,9 +4,14 @@ import {
   UserProfileContext,
   UserProfileProvider,
 } from "../providers/UserProfileProvider";
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 import Hello from "./Hello";
+import { CategoryList} from "./category/CategoryList"
+import { CategoryProvider } from "../providers/CategoryProvider";
+import UserProfileList from "./userProfile/UserProfileList";
+import PostList from "./Post/PostList";
+
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -24,6 +29,12 @@ export default function ApplicationViews() {
    return(
       <Routes>
         <Route path="/" element={<Hello />} />
+
+        <Route path="/userProfiles" element={<UserProfileList />} />
+
+        <Route path="/posts" element={<PostList />} />
+
+        <Route path="/category" element={<CategoryList />} />
       </Routes>
    );
   }
