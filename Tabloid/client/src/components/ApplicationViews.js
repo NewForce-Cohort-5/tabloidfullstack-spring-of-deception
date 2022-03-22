@@ -7,9 +7,14 @@ import {
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Hello from "./Hello";
+import { CategoryList} from "./category/CategoryList"
+import { CategoryProvider } from "../providers/CategoryProvider";
+import { CategoryForm } from "./category/CategoryForm";
 import UserProfileList from "./userProfile/UserProfileList";
 import PostList from "./Post/PostList";
 import PostDetails from "./Post/PostDetails";
+import UserProfileDetails from "./userProfile/UserProfileDetails";
+
 
 
 export default function ApplicationViews() {
@@ -30,10 +35,14 @@ export default function ApplicationViews() {
         <Route path="/" element={<Hello />} />
 
         <Route path="/userProfiles" element={<UserProfileList />} />
+        <Route path="/userProfile/:id" element={<UserProfileDetails />} />
 
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:id" element={<PostDetails />} />
 
+        <Route path="/category" element={<CategoryList />} />
+
+        <Route path="/category/add" element={<CategoryForm />} />
       </Routes>
    );
   }

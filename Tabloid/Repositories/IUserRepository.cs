@@ -8,5 +8,6 @@ namespace Tabloid.Repositories
         void Add(UserProfile userProfile);
         UserProfile GetByEmail(string email);
         public List<UserProfile> GetAll();
+        public UserProfile GetById(int id);
     }
 }

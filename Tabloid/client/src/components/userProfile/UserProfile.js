@@ -5,23 +5,24 @@ import { Link } from "react-router-dom";
 
 const UserProfile = ({ userProfileProp }) => {
   
+  
+  //Added a default image location in case the image location comes back as null
   return (
     <>
-    <Col sm="3">
-    <Card className="profileCard">
-        <CardImg top src={userProfileProp.imageLocation} alt={userProfileProp.fullName} />
-      
-      <CardBody>
-        <Link to={`/users/${userProfileProp.id}`}>
-        Posted by: {userProfileProp.displayName}<br />
-        Name: {userProfileProp.fullName}<br />
-        User Type: {userProfileProp.userType.name}
-        
-        </Link>  
-      </CardBody>
-        
-    </Card>
-    </Col>
+      <Col sm="2">
+        <Card className="profileCard">
+          <CardImg top src={userProfileProp.imageLocation || "https://avatars.dicebear.com/api/bottts/.svg"} alt={userProfileProp.name} />
+
+          <CardBody>
+            <Link to={`/userprofile/${userProfileProp.id}`}>
+              User Name: {userProfileProp.displayName}<br />
+
+
+            </Link>
+          </CardBody>
+
+        </Card>
+      </Col>
     </>
   );
 };
