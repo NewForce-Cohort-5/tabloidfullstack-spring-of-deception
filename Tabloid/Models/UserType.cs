@@ -12,5 +12,6 @@ namespace Tabloid.Models
 
         public static int ADMIN_ID => 1;
         public static int AUTHOR_ID => 2;
+        public static int DEACTIVATED_ID => 3;
     }
 }
