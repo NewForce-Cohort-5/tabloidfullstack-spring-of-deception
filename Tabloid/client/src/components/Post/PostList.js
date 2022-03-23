@@ -9,8 +9,8 @@ const PostList = () => {
     getAllPosts();
   }, []);
 
-  const user = JSON.parse(sessionStorage.getItem("userProfile"))
-  if (user.userTypeId === 1) {
+  // const user = JSON.parse(sessionStorage.getItem("userProfile"))
+  // if (user.userTypeId === 1) {
     return (
       <div className="container">
         <div className="row justify-content-center">
@@ -24,9 +24,9 @@ const PostList = () => {
         </div>
       </div>
     );
-  } else {
-    return "";
-  }
+  // } else {
+  //   return "";
+  // }
 };
 
 export default PostList;
