@@ -17,7 +17,6 @@ import UserProfileDetails from "./userProfile/UserProfileDetails";
 import MyPosts from "./Post/MyPosts";
 
 
-
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
 
@@ -38,8 +37,10 @@ export default function ApplicationViews() {
         <Route path="/userProfiles" element={<UserProfileList />} />
         <Route path="/userProfile/:id" element={<UserProfileDetails />} />
 
-        <Route path="/posts" element={<><MyPosts /> <PostList /></>} />
+        <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:id" element={<PostDetails />} />
+
+        <Route path="/myposts" element={<MyPosts />} />
 
         <Route path="/category" element={<CategoryList />} />
 
