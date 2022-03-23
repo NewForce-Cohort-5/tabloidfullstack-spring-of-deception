@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { useContext } from "react";
 import { Alert } from "reactstrap";
+import Swal from "sweetalert2";
 
 
 const Category = ({category}) => {
@@ -13,20 +14,20 @@ const Category = ({category}) => {
     const navigate = useNavigate();
 
     const handleClickDelete = () => {
-        
-        deleteCategory(category.id)
-        // .then(() => {
-        //     try {
-        //     debugger
-        //     }
-        //      catch (error) {
-        //     debugger
-        //     alert("Oh no")
-        // }
-          //  navigate("/category") // don't need this 
-                 
-    // })
-
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              deleteCategory(category.id)
+            }
+          })
+      
     }
 
     return (
