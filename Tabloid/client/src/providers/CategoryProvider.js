@@ -26,7 +26,15 @@ export const CategoryProvider = (props) => {
     const deleteCategory = catId => {
         return fetch(`https://localhost:44360/api/Category/${catId}`, {
             method: "DELETE"
-        }).then(getAllCategories)
+        }).then(r => {
+            if(r.ok){
+                getAllCategories()
+            }
+            else{
+                alert("There's too much information in this category to delete it!")
+            }
+        })
+        // .then(getAllCategories)
     }
 
     return (
