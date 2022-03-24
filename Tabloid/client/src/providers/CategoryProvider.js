@@ -34,11 +34,26 @@ export const CategoryProvider = (props) => {
                 alert("There's too much information in this category to delete it!")
             }
         })
-        // .then(getAllCategories)
+    }
+
+    const updateCategory = cat => {
+        return fetch(`https://localhost:44360/api/Category/${cat.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(cat)
+        }).then(getAllCategories)
+    }
+
+
+    const getCategoryById = (id) => {
+        return fetch (`https://localhost:44360/api/Category/${id}`)
+        .then(res => res.json())
     }
 
     return (
-        <CategoryContext.Provider value={{categories, getAllCategories, addCategory, deleteCategory}}>
+        <CategoryContext.Provider value={{categories, getAllCategories, addCategory, deleteCategory, updateCategory, getCategoryById}}>
             {props.children}
         </CategoryContext.Provider>
     );
