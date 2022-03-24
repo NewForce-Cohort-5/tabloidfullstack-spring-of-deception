@@ -71,7 +71,7 @@ export function UserProfileProvider(props) {
       headers: {
         "Content-Type": "application/json"
       },
-    })
+    }).then(getAllUsers)
   }
 
   const reactivateUser = (id) => {
@@ -80,7 +80,7 @@ export function UserProfileProvider(props) {
       headers: {
         "Content-Type": "application/json"
       },
-    })
+    }).then(getAllUsers)
   }
 
 
