@@ -1,13 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 // import { ListGroup, ListGroupItem } from "reactstrap";
 import { PostContext } from "../../providers/PostProvider";
-import {  useParams } from "react-router-dom";
-import { Card, CardBody, CardImg } from "reactstrap";
+import { useParams } from "react-router-dom";
+import { Card, CardBody, CardImg, Button } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 const PostDetails = () => {
     const [post, setPost] = useState();
     const { getPost } = useContext(PostContext);
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getPost(id).then(setPost);
@@ -31,7 +33,7 @@ const PostDetails = () => {
                 <p>Published on: {formattedDate}</p>
                 <p>User: {post.userProfile.displayName}</p>
             </CardBody>
-            <a href="/posts">Go back</a>
+            <Button onClick={() => navigate(-1)}>Go back</Button>
         </Card>
     );
 };
