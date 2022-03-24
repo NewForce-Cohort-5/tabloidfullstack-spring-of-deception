@@ -65,5 +65,22 @@ namespace Tabloid.Controllers
             }
             return Ok(user);
         }
+
+        // Patch /userprofilecontroller/deactivate/id
+        [HttpPatch("deactivate/{id}")]
+        public void Deactivate(int id)
+        {
+            _userRepository.Deactivate(id);
+            
+        }
+
+        // Patch /userprofilecontroller/deactivate/id
+        [HttpPatch("reactivate/{id}")]
+        public void Reactivate(int id)
+        {
+            _userRepository.Reactivate(id);
+
+        }
+
     }
 }

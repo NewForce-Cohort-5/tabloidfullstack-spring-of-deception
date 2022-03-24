@@ -5,7 +5,7 @@ import { UserProfileContext } from "../../providers/UserProfileProvider";
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useContext(UserProfileContext);
+  const { login, userProfile } = useContext(UserProfileContext);
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
