@@ -14,7 +14,7 @@ import UserProfileList from "./userProfile/UserProfileList";
 import PostList from "./Post/PostList";
 import PostDetails from "./Post/PostDetails";
 import UserProfileDetails from "./userProfile/UserProfileDetails";
-
+import MyPosts from "./Post/MyPosts";
 
 
 export default function ApplicationViews() {
@@ -39,6 +39,8 @@ export default function ApplicationViews() {
 
         <Route path="/posts" element={<PostList />} />
         <Route path="/posts/:id" element={<PostDetails />} />
+
+        <Route path="/myposts" element={<MyPosts />} />
 
         <Route path="/category" element={<CategoryList />} />
 
