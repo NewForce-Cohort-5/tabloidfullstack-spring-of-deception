@@ -1,18 +1,34 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import Category from "./CategoryCard";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 
 export const CategoryForm = () => {
 
-    const { addCategory, getAllCategories} = useContext(CategoryContext)
+    const { addCategory, getAllCategories, updateCategory, getCategoryById} = useContext(CategoryContext)
 
     const [category, setCategory] = useState({})
+    const [isLoading, setIsLoading] = useState(true);
+
+    const { categoryId } = useParams();
 
     const navigate = useNavigate();
 
+
     useEffect(() => {
-        getAllCategories()
+        getAllCategories().then(() => {
+            if (categoryId) {
+                getCategoryById(categoryId)
+                .then(category => {
+                    setCategory(category)
+                    setIsLoading(false)
+                })
+            } else {
+                setIsLoading(false)
+            }
+        })
+
+        
     }, [])
 
     const handleControlledInputChange = (event) => {
@@ -21,10 +37,22 @@ export const CategoryForm = () => {
         setCategory(newCategory)
     }
 
-    const handleSaveCategory = (event) => {
-        event.preventDefault()
-        addCategory(category)
-        .then(navigate("/category"))
+    const handleSaveCategory = (e) => {
+        e.preventDefault()
+        if (categoryId) {
+            debugger
+            updateCategory({
+                id: category.id,
+                name: category.name
+            })
+            .then(() => navigate(`/category`))
+        } else {
+            debugger
+            addCategory({
+                name: category.name
+            })
+            .then(() => navigate(`/category`))
+        }
     }
 
     return (
@@ -33,7 +61,7 @@ export const CategoryForm = () => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="category-name">Name: </label>
-                    <input className="form-control" type="text" id="name" onChange={handleControlledInputChange} />
+                    <input className="form-control" type="text" value={category.name} id="name" onChange={handleControlledInputChange} />
                     <button className="btn btn-primary" type="submit" onClick={handleSaveCategory}>Save Category</button>
                 </div>
             </fieldset>

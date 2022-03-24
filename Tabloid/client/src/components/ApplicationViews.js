@@ -43,6 +43,8 @@ export default function ApplicationViews() {
         <Route path="/category" element={<CategoryList />} />
 
         <Route path="/category/add" element={<CategoryForm />} />
+
+        <Route path="/category/edit/:categoryId" element={<CategoryForm />} />
       </Routes>
    );
   }
