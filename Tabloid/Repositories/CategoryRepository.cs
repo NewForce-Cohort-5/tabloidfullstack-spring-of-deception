@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
@@ -58,5 +59,25 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
+        public void DeleteCategory(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Category WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                
+                        cmd.ExecuteNonQuery();
+              
+                     
+
+                  
+                }
+            }
+        }
+
     }
 }

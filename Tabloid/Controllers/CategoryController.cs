@@ -57,8 +57,18 @@ namespace Tabloid.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
+        
         {
+            try
+            {
+                _categoryRepository.DeleteCategory(id);
+                return NoContent();
+            } 
+            catch (Exception ex)    
+            {
+                return NotFound();
+            }
         }
     }
 
