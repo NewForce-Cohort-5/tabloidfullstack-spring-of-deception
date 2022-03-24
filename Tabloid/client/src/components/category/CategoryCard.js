@@ -33,6 +33,7 @@ const Category = ({category}) => {
     return (
         <>
         <p className="category-list">{category.name}</p>
+        <button className="editCategory" onClick={() => navigate(`/category/edit/${category.id}`)}>Edit</button>
         <button className="deleteCategory" onClick={event => {
             event.preventDefault()
             handleClickDelete()
