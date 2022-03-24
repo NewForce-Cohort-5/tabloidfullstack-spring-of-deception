@@ -9,5 +9,8 @@ namespace Tabloid.Repositories
         UserProfile GetByEmail(string email);
         public List<UserProfile> GetAll();
         public UserProfile GetById(int id);
+        public void Deactivate(int id);
+        public void Reactivate(int id);
+
     }
 }

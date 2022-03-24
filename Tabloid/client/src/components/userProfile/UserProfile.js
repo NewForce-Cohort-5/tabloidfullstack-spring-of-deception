@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, CardImg, CardBody, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Card, CardImg, CardBody, Col, Button } from "reactstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const UserProfile = ({ userProfileProp }) => {
-  
+  const navigate = useNavigate()
   
   //Added a default image location in case the image location comes back as null
   return (
@@ -19,6 +19,7 @@ const UserProfile = ({ userProfileProp }) => {
 
 
             </Link>
+            
           </CardBody>
 
         </Card>

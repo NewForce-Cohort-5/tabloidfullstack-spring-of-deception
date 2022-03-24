@@ -82,6 +82,39 @@ namespace Tabloid.Repositories
             }
         }
 
+        public void Deactivate(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE UserProfile
+                                        SET UserTypeId = 3
+                                        Where Id = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Reactivate(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE UserProfile
+                                        SET UserTypeId = 2
+                                        Where Id = @Id";
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
         public List<UserProfile> GetAll()
         {
             using (var conn = Connection)
@@ -173,6 +206,8 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
+        
 
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)

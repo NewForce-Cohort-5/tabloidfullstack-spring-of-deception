@@ -18,8 +18,9 @@ import MyPosts from "./Post/MyPosts";
 
 
 export default function ApplicationViews() {
-  const { isLoggedIn } = useContext(UserProfileContext);
+  const { isLoggedIn, userProfile } = useContext(UserProfileContext);
 
+  
   if (!isLoggedIn) {
     return (
       <Routes>
@@ -28,7 +29,7 @@ export default function ApplicationViews() {
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     );
-  }
+  } 
   else{
    return(
       <Routes>
