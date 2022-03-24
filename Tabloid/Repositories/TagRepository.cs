@@ -38,24 +38,24 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void AddTag(Tag tag)
-        //{
-        //    using (SqlConnection conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (SqlCommand cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                        INSERT INTO Tag (Name)
-        //                    OUTPUT INSERTED.ID
-        //                            VALUES (@name)";
+        public void AddTag(Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                INSERT INTO Tag (Name)
+                            OUTPUT INSERTED.ID
+                                    VALUES (@name)";
 
-        //            DbUtils.AddParameter(cmd, "@Name", Tag.Name);
+                    DbUtils.AddParameter(cmd, "@Name", tag.Name);
 
-        //            tag.Id = (int)cmd.ExecuteScalar();
-        //        }
-        //    }
-        //}
+                    tag.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
 
         //public void DeleteTag (int id)
         //{
@@ -71,7 +71,7 @@ namespace Tabloid.Repositories
         //        }
         //    }
         //}
-    
+
         //public void UpdateTag(Tag tag)
         //{
         //    Connection.Open();
@@ -88,7 +88,7 @@ namespace Tabloid.Repositories
         //        cmd.ExecuteNonQuery();
         //    }
         //}
-    
+
         //public Tag GetById(int id)
         //{
         //    using (var conn = Connection)

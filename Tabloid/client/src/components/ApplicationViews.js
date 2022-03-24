@@ -16,6 +16,7 @@ import PostDetails from "./Post/PostDetails";
 import UserProfileDetails from "./userProfile/UserProfileDetails";
 import MyPosts from "./Post/MyPosts";
 import { TagList } from "./tag/TagList";
+import { TagForm } from "./tag/TagForm";
 
 
 export default function ApplicationViews() {
@@ -52,6 +53,8 @@ export default function ApplicationViews() {
         <Route path="/category/edit/:categoryId" element={<CategoryForm />} />
 
         <Route path="/tag" element={<TagList />} />
+
+        <Route path="/tag/add" element={<TagForm />} />
       </Routes>
    );
   }

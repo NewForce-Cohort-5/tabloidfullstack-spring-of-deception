@@ -17,9 +17,15 @@ return (
 <div className="container">
     <h3 className="tag-header">Tags</h3>
 
+    <button id="addTag" onClick={() => {
+        navigate("/tag/add")
+    }}>Add new tag</button>
+
     <div className="tags-column">
         {tags.map((singleTagInLoop) => (<Tag key={singleTagInLoop.id} tag={singleTagInLoop} />))}
     </div>
+
+    
 </div>
 
 )
