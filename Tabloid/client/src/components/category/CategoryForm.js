@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
-import Category from "./CategoryCard";
 import { useNavigate, useParams} from "react-router-dom";
 
 export const CategoryForm = () => {
@@ -40,14 +39,14 @@ export const CategoryForm = () => {
     const handleSaveCategory = (e) => {
         e.preventDefault()
         if (categoryId) {
-            debugger
+        
             updateCategory({
                 id: category.id,
                 name: category.name
             })
             .then(() => navigate(`/category`))
         } else {
-            debugger
+          
             addCategory({
                 name: category.name
             })
