@@ -4,13 +4,28 @@ import { useNavigate, useParams} from "react-router-dom";
 
 export const TagForm =() => {
 
-    const {addTag, getAllTags, deleteTag} = useContext(TagContext)
+    const {addTag, getAllTags, deleteTag, updateTag, getTagById} = useContext(TagContext)
 
+    const [isLoading, setIsLoading] = useState(true);
     const [tag, setTag] = useState({});
 
     const { tagId } = useParams();
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getAllTags().then(() => {
+            if (tagId) {
+                getTagById(tagId)
+                .then(tag => {
+                    setTag(tag)
+                    setIsLoading(false)
+                })
+            } else {
+                setIsLoading(false)
+            }
+        })
+    }, [])
 
  
     const handleControlledInputChange = (event) => {
@@ -21,10 +36,20 @@ export const TagForm =() => {
 
     const handleSaveTag = (e) => {
         e.preventDefault()
-        addTag({
-            name: tag.name
-        })
-        .then(navigate("/tag"))
+        if (tagId) {
+        
+            updateTag({
+                id: tag.id,
+                name: tag.name
+            })
+            .then(() => navigate(`/tag`))
+        } else {
+          
+            addTag({
+                name: tag.name
+            })
+            .then(() => navigate(`/tag`))
+        }
     }
 
     return (

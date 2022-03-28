@@ -32,6 +32,10 @@ return (
     <>
     <p className="tag-list">{tag.name}</p>
 
+    <button className="updateTag" onClick={() => {
+        navigate(`/tag/edit/${tag.id}`)
+    }}>Edit</button>
+
     <button className="deleteTag" onClick={event => {
         event.preventDefault()
         handleClickDelete()
