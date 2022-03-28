@@ -5,21 +5,24 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { CategoryProvider } from "./providers/CategoryProvider";
 import { PostProvider } from './providers/PostProvider';
+import { CommentProvider } from './providers/CommentProvider';
 import { TagProvider } from './providers/TagProvider';
 
 function App() {
   return (
     <Router>
-      <CategoryProvider>
-        <UserProfileProvider>
-          <PostProvider>
-            <TagProvider>
-            <Header />
-            <ApplicationViews />
-            </TagProvider>
-          </PostProvider>
-        </UserProfileProvider>
-      </CategoryProvider>
+      <CommentProvider>
+        <CategoryProvider>
+          <UserProfileProvider>
+            <PostProvider>
+              <TagProvider>
+                <Header />
+                <ApplicationViews />
+              </TagProvider>
+            </PostProvider>
+          </UserProfileProvider>
+        </CategoryProvider>
+      </CommentProvider>
     </Router>
   );
 }
