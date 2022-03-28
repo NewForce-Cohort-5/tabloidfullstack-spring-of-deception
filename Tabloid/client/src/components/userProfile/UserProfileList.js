@@ -5,33 +5,33 @@ import { CardGroup, Row } from 'reactstrap';
 
 
 const UserProfileList = () => {
-    // const []
-    //get context from userprofileprovider
-    const {userProfiles, getAllUsers} = useContext(UserProfileContext)
-    
-    //get all profiles
-    useEffect(() => {
-        getAllUsers()
-    })
+  // const []
+  //get context from userprofileprovider
+  const { userProfiles, getAllUsers } = useContext(UserProfileContext)
 
-  
+  //get all profiles
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+
+
 
   if (!userProfiles) {
     return null;
   }
 
   return (
-    
-        
-        <CardGroup>
-        <Row>
+
+
+    <CardGroup>
+      <Row>
         {userProfiles.map((p) => (
-            <UserProfile key={p.id} userProfileProp={p} />
+          <UserProfile key={p.id} userProfileProp={p} />
         ))}
-        </Row>
-        </CardGroup>
-        
-     
+      </Row>
+    </CardGroup>
+
+
   );
 };
 

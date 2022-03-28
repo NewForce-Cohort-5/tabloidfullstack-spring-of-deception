@@ -207,7 +207,67 @@ namespace Tabloid.Repositories
             }
         }
 
-        
+        public void UpdateProfileType(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                               UPDATE UserProfile
+                                SET DisplayName = @displayName,
+                                FirstName = @firstName,
+                                LastName = @lastName,
+                                Email = @email,
+                                ImageLocation = @imageLocation,
+                                UserTypeId = @userTypeId
+                                WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@displayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@firstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@lastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@imageLocation", userProfile.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@userTypeId", userProfile.UserTypeId);
+                    DbUtils.AddParameter(cmd, "@Id", userProfile.Id);
+
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<UserType> GetUserTypes()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, Name
+                                        FROM UserType                    
+                    ";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var userTypes = new List<UserType>();
+                    while (reader.Read())
+                    {
+                        userTypes.Add(new UserType()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            
+                        });
+                    }
+
+                    reader.Close();
+
+                    return userTypes;
+                }
+            }
+        }
 
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)

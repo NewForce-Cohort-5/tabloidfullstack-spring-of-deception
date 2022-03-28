@@ -15,6 +15,7 @@ import PostList from "./Post/PostList";
 import PostDetails from "./Post/PostDetails";
 import UserProfileDetails from "./userProfile/UserProfileDetails";
 import MyPosts from "./Post/MyPosts";
+import { UserProfileForm } from "./userProfile/UserProfileForm";
 import { TagList } from "./tag/TagList";
 import { TagForm } from "./tag/TagForm";
 
@@ -39,6 +40,8 @@ export default function ApplicationViews() {
 
         <Route path="/userProfiles" element={<UserProfileList />} />
         <Route path="/userProfile/:id" element={<UserProfileDetails />} />
+
+        <Route path="/userProfiles/edit/:id" element={<UserProfileForm />} />
 
         <Route path="/posts" element={<PostList />} />
 

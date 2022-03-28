@@ -11,6 +11,7 @@ namespace Tabloid.Repositories
         public UserProfile GetById(int id);
         public void Deactivate(int id);
         public void Reactivate(int id);
-
+        public void UpdateProfileType(UserProfile userProfile);
+        public List<UserType> GetUserTypes();
     }
 }

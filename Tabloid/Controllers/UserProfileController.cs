@@ -36,6 +36,14 @@ namespace Tabloid.Controllers
             return Ok(_userRepository.GetAll());
         }
 
+
+        // GET: UserProfileController
+        [HttpGet("userTypes")]
+        public ActionResult GetUserTypes()
+        {
+            return Ok(_userRepository.GetUserTypes());
+        }
+
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
@@ -81,6 +89,17 @@ namespace Tabloid.Controllers
             _userRepository.Reactivate(id);
 
         }
+
+        //Update /userprofilecontroller/id
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, UserProfile userProfile)
+        {
+
+            _userRepository.UpdateProfileType(userProfile);
+            return NoContent();
+
+        }
+
 
     }
 }

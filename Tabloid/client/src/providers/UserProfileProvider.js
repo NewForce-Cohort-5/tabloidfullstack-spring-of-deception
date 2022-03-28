@@ -10,6 +10,7 @@ export const UserProfileContext = createContext();
 export function UserProfileProvider(props) {
   //user state holds list of users from API
   const [userProfiles, setUserProfiles] = useState([])
+  const [userTypes, setUserTypes] = useState([])
 
   const apiUrl = "https://localhost:44360";
 
@@ -60,6 +61,12 @@ export function UserProfileProvider(props) {
       .then(setUserProfiles);
   }
 
+  const getUserTypes = () => {
+    return fetch(`${apiUrl}/api/userprofile/usertypes`)
+      .then((res) => res.json())
+      .then(setUserTypes);
+  }
+
   const getById = (id) => {
     return fetch(`${apiUrl}/api/userprofile/${id}`)
       .then((res) => res.json())
@@ -83,9 +90,18 @@ export function UserProfileProvider(props) {
     }).then(getAllUsers)
   }
 
+  const updateUser = user => {
+    return fetch(`https://localhost:44360/api/UserProfile/${user.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(user)
+    }).then(getAllUsers)
+}
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles, getById, deactivateUser, reactivateUser }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles, getById, deactivateUser, reactivateUser, updateUser, getUserTypes, userTypes }}>
       {props.children}
     </UserProfileContext.Provider>
   );
