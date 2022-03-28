@@ -55,6 +55,8 @@ export default function ApplicationViews() {
         <Route path="/tag" element={<TagList />} />
 
         <Route path="/tag/add" element={<TagForm />} />
+
+        <Route path="/tag/edit/:tagId" element={<TagForm />} />
       </Routes>
    );
   }

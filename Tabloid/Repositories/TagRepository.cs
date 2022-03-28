@@ -57,72 +57,73 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public void DeleteTag (int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"DELETE FROM Tag WHERE Id = @Id";
-        //            DbUtils.AddParameter(cmd, "@id", id);
+        public void DeleteTag(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Tag WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
 
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
-        //public void UpdateTag(Tag tag)
-        //{
-        //    Connection.Open();
-        //    using (var cmd = Connection.CreateCommand())
-        //    {
-        //        cmd.CommandText = @"
-        //                    UPDATE Tag
-        //                      SET Name = @name
-        //                    WHERE Id = @id";
+        public void UpdateTag(Tag tag)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                            UPDATE Tag
+                              SET Name = @name
+                            WHERE Id = @id";
 
-        //        DbUtils.AddParameter(cmd, "@name", tag.Name);
-        //        DbUtils.AddParameter(cmd, "@id", tag.Id);
+                    DbUtils.AddParameter(cmd, "@name", tag.Name);
+                    DbUtils.AddParameter(cmd, "@id", tag.Id);
 
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //}
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
-        //public Tag GetById(int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                        SELECT Tag.Name
-        //                        FROM Tag
-        //                        LEFT JOIN Post on Post.TagId = Tag.Id
-        //                        WHERE Tag.Id = @Id";
+        public Tag GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                SELECT Id, [Name] FROM Tag
+                                WHERE Id = @id";
 
-        //            DbUtils.AddParameter(cmd, "@Id," id);
+                    DbUtils.AddParameter(cmd, "@id", id);
 
-        //            var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-        //            Tag tag = null;
-        //            while (reader.Read())
-        //            {
-        //                if (tag == null)
-        //                {
-        //                    tag = new Tag()
-        //                    {
-        //                        Id = id,
-        //                        Name = DbUtils.GetString(reader, "Name")
-        //                    };
-        //                }
-        //            }
-        //            reader.Close();
-        //            return tag;
-        //        }
-        //    }
-        //}
+                    Tag tag = null;
+                    while (reader.Read())
+                    {
+                        if (tag == null)
+                        {
+                            tag = new Tag()
+                            {
+                                Id = id,
+                                Name = DbUtils.GetString(reader, "Name")
+                            };
+                        }
+                    }
+                    reader.Close();
+                    return tag;
+                }
+            }
+        }
 
     }
 }
