@@ -4,7 +4,7 @@ import { useNavigate, useParams} from "react-router-dom";
 
 export const TagForm =() => {
 
-    const {addTag, getAllTags} = useContext(TagContext)
+    const {addTag, getAllTags, deleteTag} = useContext(TagContext)
 
     const [tag, setTag] = useState({});
 
