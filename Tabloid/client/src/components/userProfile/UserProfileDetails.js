@@ -76,7 +76,7 @@ const UserProfileDetails = () => {
             <Row>
                 <Col>
                     <Card className="profileCard">
-                        <CardImg top src={userProfile.imageLocation} alt={userProfile.fullName} />
+                        <CardImg top src={userProfile.imageLocation || "https://avatars.dicebear.com/api/bottts/.svg"} alt={userProfile.fullName} />
 
                         <CardBody>
                             Name: {userProfile.fullName}<br />
@@ -90,6 +90,10 @@ const UserProfileDetails = () => {
                             
                             {userProfile.userTypeId === 3 ? <Button color="warning" onClick={handleReactivate}>Reactivate User</Button> : <Button color="danger" onClick={handleDeactivate}>Deactivate User</Button>}
 
+                            <Button color="primary" onClick={() => {
+                            navigate(`/userprofiles/edit/${userProfile.id}`)
+                        }}>Edit User</Button>
+
                         </CardBody>
                         <Button color="primary" onClick={() => {
                             navigate(`/userprofiles`)
@@ -99,6 +103,8 @@ const UserProfileDetails = () => {
 
             </Row>
         </CardGroup>
+
+        
     );
 };
 
