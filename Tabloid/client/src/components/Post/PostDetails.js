@@ -89,7 +89,7 @@ const PostDetails = () => {
         <CardGroup>
       <Row>
         {comments.map((c) => (
-          <Comment key={c.id} commentProp={c} />
+          <Comment key={c.id} commentProp={c} swalProp={setSwalProps} />
         ))}
       </Row>
     </CardGroup>

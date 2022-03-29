@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.5",
-    "framer-motion": "^6.2.8",
     "moment": "^2.29.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
