@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { CommentContext } from "../../providers/CommentProvider";
 
 
-
+//Pulling swalProp from post detail to be able to update state in the post detail when comment is deleted
 
 const Comment = ({ commentProp, swalProp }) => {
     
@@ -28,16 +28,18 @@ const Comment = ({ commentProp, swalProp }) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
               Swal.fire(
                 'Deleted!',
-                'Wood color has been deleted.',
+                'Comment has been deleted.',
                 'success'
             ).then(deleteComment(commentProp.id))
             .then(swalProp)
             
-            }})}    
+        }})
+    }
+            
     
     return (
         <Card className="container m-4">
