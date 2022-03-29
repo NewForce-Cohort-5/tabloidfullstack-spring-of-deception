@@ -12,10 +12,18 @@ export const CommentProvider = (props) => {
             .then(setComments);
     };
 
-    
+    const addComment = (comment) => {
+        return fetch("https://localhost:44360/api/comment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comment),
+      })
+    }
 
     return (
-        <CommentContext.Provider value={{ comments, getAllCommentsByPostId }}>
+        <CommentContext.Provider value={{ comments, getAllCommentsByPostId, addComment }}>
             {props.children}
         </CommentContext.Provider>
     );
