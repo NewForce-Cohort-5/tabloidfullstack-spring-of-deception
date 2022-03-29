@@ -53,15 +53,24 @@ const PostDetails = () => {
               return { subject: subject, content: content }
             }
         }).then((result) => {
-            addComment({
-                postId: id,
-                userProfileId: user.id,
-                subject: result.value.subject,
-                content: result.value.content
-            })
-        .then(getAllCommentsByPostId(id))
+            addComment(`
+                postId: ${id}
+                userProfileId: ${user.id}
+                subject: ${result.value.subject}
+                content: ${result.value.content}
+            `)
+        // .then(getAllCommentsByPostId(id))
         
-    }
+        // .then((result) => {
+        //     addComment({
+        //         postId: id,
+        //         userProfileId: user.id,
+        //         subject: result.value.subject,
+        //         content: result.value.content
+        //     })
+        // .then(getAllCommentsByPostId(id))
+
+    })
 
     
 
