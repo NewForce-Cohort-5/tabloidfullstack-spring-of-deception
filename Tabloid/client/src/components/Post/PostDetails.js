@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
 import Comment from "../comment/Comment";
 import Swal from 'sweetalert2';
-import swal from '@sweetalert/with-react'
 
 
 const PostDetails = () => {

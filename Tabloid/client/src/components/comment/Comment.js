@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
 import Moment from "moment";
+import {motion} from "framer-motion"
+
 
 const Comment = ({ commentProp }) => {
     
