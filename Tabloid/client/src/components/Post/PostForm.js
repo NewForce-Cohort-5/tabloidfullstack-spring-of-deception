@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
     Form,
     FormGroup,
@@ -42,7 +42,10 @@ const PostForm = () => {
             navigate("/posts");
         });
     };
-    getAllCategories(category);
+    // useEffect(() => {
+    //     getAllCategories()});
+    
+    
     return (
         <div className="container pt-4">
             <div className="row justify-content-center">
@@ -76,7 +79,7 @@ const PostForm = () => {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="categoryId">Category</Label>
-                                <select value={categoryId} id="categoryId" onChange={(e) => setCategoryId(e.target.value)}>
+                                <select id="categoryId" onChange={(e) => setCategoryId(e.target.value)}>
                                     <option value="0">Select a Category</option>
                                     {category.map(c => (
                                         <option key={c.id} value={c.id}>
