@@ -8,7 +8,7 @@ import { CommentContext } from "../../providers/CommentProvider";
 
 //Pulling swalProp from post detail to be able to update state in the post detail when comment is deleted
 
-const Comment = ({ commentProp, swalProp }) => {
+const Comment = ({ commentProp, stateProp }) => {
     
     //Format comment date using moment library
     let commentDate = commentProp.createDateTime
@@ -35,7 +35,7 @@ const Comment = ({ commentProp, swalProp }) => {
                 'Comment has been deleted.',
                 'success'
             ).then(deleteComment(commentProp.id))
-            .then(swalProp)
+            .then(stateProp)
             
         }})
     }
