@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { CommentContext } from "../../providers/CommentProvider";
 import Comment from "../comment/Comment";
 import Swal from 'sweetalert2';
-import {CommentForm} from "../comment/CommentForm"
 import swal from '@sweetalert/with-react'
 
 
@@ -17,17 +16,21 @@ const PostDetails = () => {
     const {comments, getAllCommentsByPostId, addComment} = useContext(CommentContext)
     const { id } = useParams();
     const navigate = useNavigate();
-    const [swalProps, setSwapProps] = useState()
+    //added this just to be able to update state
+    //Added swalProps to useEffect and setSwalProps to add comment
+    //When addComment set swalProps useEffect updates stat and refreshes comments
+    const [swalProps, setSwalProps] = useState()
 
     //get current user
     const user = JSON.parse(sessionStorage.getItem("userProfile"))
 
+    //swalProps in brackets is just to update state when new comment is added
     useEffect(() => {
        
         getPost(id).then(setPost)
         .then(getAllCommentsByPostId(id));
         
-    }, []);
+    }, [swalProps]);
 
     if (!post) {
         return null;
@@ -53,24 +56,15 @@ const PostDetails = () => {
               return { subject: subject, content: content }
             }
         }).then((result) => {
-            addComment(`
-                postId: ${id}
-                userProfileId: ${user.id}
-                subject: ${result.value.subject}
-                content: ${result.value.content}
-            `)
-        // .then(getAllCommentsByPostId(id))
-        
-        // .then((result) => {
-        //     addComment({
-        //         postId: id,
-        //         userProfileId: user.id,
-        //         subject: result.value.subject,
-        //         content: result.value.content
-        //     })
-        // .then(getAllCommentsByPostId(id))
+            addComment({
+                postId: id,
+                userProfileId: user.id,
+                subject: result.value.subject,
+                content: result.value.content
+            })
+        .then(setSwalProps) //setSwalProps just to update state to refresh comments
 
-    })
+    })}
 
     
 
