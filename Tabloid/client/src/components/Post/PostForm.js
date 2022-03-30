@@ -24,7 +24,7 @@ const PostForm = () => {
 
     // Use this hook to allow us to programatically redirect users
     const navigate = useNavigate();
-    
+
 
     const submit = (e) => {
         const post = {
@@ -35,16 +35,20 @@ const PostForm = () => {
             categoryId,
             userProfileId: +user.id
         };
-
-        addPost(post).then((p) => {
-            // Navigate the user back to the home route
-            navigate("/posts");
-        });
+        if (post.title === "" || post.content === "") {
+            alert("Please make sure title and content are filled out");
+        } else {
+            addPost(post).then((p) => {
+                // Navigate the user back to the posts list
+                navigate("/posts");
+            });
+        }
     };
     useEffect(() => {
-        getAllCategories()},[]);
-    
-    
+        getAllCategories()
+    }, []);
+
+
     return (
         <div className="container pt-4">
             <div className="row justify-content-center">
@@ -61,26 +65,26 @@ const PostForm = () => {
                             <FormGroup>
                                 <Label for="imageLocation">Image URL</Label>
                                 <Input
-                                    id="imageLocation"
+                                    id="imageLocation" required autoFocus
                                     onChange={(e) => setImageLocation(e.target.value)}
                                 />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="title">Title</Label>
-                                <Input id="title" onChange={(e) => setTitle(e.target.value)} />
+                                <Input required id="title" onChange={(e) => setTitle(e.target.value)} />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="content">Content</Label>
                                 <Input
-                                    id="content"
+                                    id="content" required
                                     onChange={(e) => setContent(e.target.value)}
                                 />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="categoryId">Category</Label>
-                                <br/>
+                                <br />
                                 <select id="categoryId" onChange={(e) => setCategoryId(e.target.value)}>
-                                    <option value="0">Select a Category</option>
+                                    {/* <option value="0">Select a Category</option> */}
                                     {categories.map(c => (
                                         <option key={c.id} value={c.id}>
                                             {c.name}
