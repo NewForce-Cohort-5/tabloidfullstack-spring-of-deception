@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import Post from "./Post";
 
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
-
+  
   useEffect(() => {
     getAllPosts();
   }, []);
