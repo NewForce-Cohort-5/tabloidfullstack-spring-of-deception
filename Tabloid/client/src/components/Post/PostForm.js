@@ -38,7 +38,7 @@ const PostForm = () => {
 
         addPost(post).then((p) => {
             // Navigate the user back to the home route
-            navigate("/myposts");
+            navigate("/posts");
         });
     };
     useEffect(() => {
