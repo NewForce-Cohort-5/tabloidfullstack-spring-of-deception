@@ -1,12 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import Post from "./Post";
+import { Button } from "reactstrap";
+
 
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
 
+  //State is for view more. slice your map to state "visible"
+  //Change number in state for initial number of cards
+  const [visible, setVisible] = useState(5)
+  
+  //function that adds a number to state visible to increase the number of cards seen
+  //this is called on the button
+  //change the number to adjust how many cards you want added
+  const showMorePosts = () => {
+    setVisible((prevValue) => prevValue + 5)
+  }
+
   useEffect(() => {
-    getAllPosts();
+    getAllPosts()
+    
   }, []);
 
   // const user = JSON.parse(sessionStorage.getItem("userProfile"))
@@ -17,9 +31,12 @@ const PostList = () => {
         <h2>All Posts</h2>
         <div className="cards-column">
           <br />
-          {posts.map((post) => (
+          {posts.slice(0, visible).map((post) => (
             <Post key={post.id} post={post} />
           ))}
+          <Button
+          onClick={showMorePosts}
+          >View More Posts</Button>
         </div>
       </div>
     </div>
