@@ -44,8 +44,10 @@ namespace Tabloid.Controllers
 
         // PUT api/<CommentController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, Comment comment)
         {
+            _commentRepository.UpdateComment(comment);
+            return NoContent();
         }
 
         // DELETE api/<CommentController>/5

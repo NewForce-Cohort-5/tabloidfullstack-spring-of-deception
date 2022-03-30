@@ -149,7 +149,7 @@ namespace Tabloid.Repositories
         }
         public void UpdateComment(Comment comment)
         {
-            using (SqlConnection conn = Connection)
+            using (var conn = Connection)
             {
                 conn.Open();
 
@@ -162,17 +162,17 @@ namespace Tabloid.Repositories
                                 UserProfileId = @userProfileId, 
                                 Subject = @subject, 
                                 Content = @content, 
-                                CreateDateTime = @createDateTime,
+                                CreateDateTime = @createDateTime
                                 
                             WHERE Id = @id";
 
-                    cmd.Parameters.AddWithValue("@postId", comment.PostId);
-                    cmd.Parameters.AddWithValue("@userProfileId", comment.Content);
-                    cmd.Parameters.AddWithValue("@subject", comment.Subject);
-                    cmd.Parameters.AddWithValue("@content", comment.CreateDateTime);
-                    cmd.Parameters.AddWithValue("@createDateTime", comment.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@postId", comment.PostId);
+                    DbUtils.AddParameter(cmd, "@userProfileId", comment.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@subject", comment.Subject);
+                    DbUtils.AddParameter(cmd, "@content", comment.Content);
+                    DbUtils.AddParameter(cmd, "@createDateTime", comment.CreateDateTime);
 
-                    cmd.Parameters.AddWithValue("@id", comment.Id);
+                    DbUtils.AddParameter(cmd, "@id", comment.Id);
 
                     cmd.ExecuteNonQuery();
                 }
