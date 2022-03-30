@@ -19,6 +19,7 @@ const PostDetails = () => {
     //Added swalProps to useEffect and setSwalProps to add comment
     //When addComment set swalProps useEffect updates stat and refreshes comments
     const [swalProps, setSwalProps] = useState()
+    
 
     //get current user
     const user = JSON.parse(sessionStorage.getItem("userProfile"))
@@ -89,7 +90,7 @@ const PostDetails = () => {
         <CardGroup>
       <Row>
         {comments.map((c) => (
-          <Comment key={c.id} commentProp={c} />
+          <Comment key={c.id} commentProp={c} swalProp={setSwalProps} />
         ))}
       </Row>
     </CardGroup>
