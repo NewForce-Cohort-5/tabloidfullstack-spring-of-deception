@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { PostContext } from "../../providers/PostProvider";
 import { Button } from "reactstrap";
 
-const Post = ({ post }) => {
+const Post = ({ post, reloadProp }) => {
 
     const { deletePost } = useContext(PostContext)
     const user = JSON.parse(sessionStorage.getItem("userProfile"))
@@ -22,7 +22,7 @@ const Post = ({ post }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                deletePost(post.id).then(window.location.reload(false))
+                deletePost(post.id).then(reloadProp)
                 Swal.fire(
                     'Deleted!',
                     'Post has been deleted.',

@@ -4,10 +4,11 @@ import Post from "./Post";
 
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
+  const [reload, setReload] = useState();
   
   useEffect(() => {
     getAllPosts();
-  }, []);
+  }, [reload]);
 
   // const user = JSON.parse(sessionStorage.getItem("userProfile"))
   // if (user.userTypeId === 1) {
@@ -18,7 +19,7 @@ const PostList = () => {
         <div className="cards-column">
           <br />
           {posts.map((post) => (
-            <Post key={post.id} post={post} />
+            <Post key={post.id} post={post} reloadProp={setReload} />
           ))}
         </div>
       </div>
