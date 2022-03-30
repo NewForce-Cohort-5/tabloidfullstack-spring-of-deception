@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Repositories;
@@ -192,8 +193,8 @@ namespace Tabloid.Repositories
                     DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
                     DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", post.CreateDateTime);
-                    DbUtils.AddParameter(cmd, "@PublishDateTime", post.PublishDateTime);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
+                    DbUtils.AddParameter(cmd, "@PublishDateTime", DateTime.Now);
                     DbUtils.AddParameter(cmd, "@IsApproved", post.IsApproved);
 
                     post.Id = (int)cmd.ExecuteScalar();
