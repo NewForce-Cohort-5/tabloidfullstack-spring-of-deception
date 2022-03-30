@@ -56,6 +56,7 @@ const PostDetails = () => {
               return { subject: subject, content: content }
             }
         }).then((result) => {
+            if (result.isConfirmed) {
             addComment({
                 postId: id,
                 userProfileId: user.id,
@@ -64,7 +65,12 @@ const PostDetails = () => {
             })
         .then(setSwalProps) //setSwalProps just to update state to refresh comments
 
-    })}
+        }})
+
+
+    }
+
+
 
     
 
@@ -90,7 +96,7 @@ const PostDetails = () => {
         <CardGroup>
       <Row>
         {comments.map((c) => (
-          <Comment key={c.id} commentProp={c} swalProp={setSwalProps} />
+          <Comment key={c.id} commentProp={c} swalProp={setSwalProps} postId={id} />
         ))}
       </Row>
     </CardGroup>
