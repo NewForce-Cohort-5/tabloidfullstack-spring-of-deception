@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Hello() {
+  const user = JSON.parse(sessionStorage.getItem("userProfile"))
   return (
     <span style={{
       position: "fixed",
@@ -9,6 +10,6 @@ export default function Hello() {
       top: "50%",
       marginTop: "-0.5rem",
       textAlign: "center",
-    }}>hello</span>
+    }}>hello {user.fullName}</span>
   );
 }

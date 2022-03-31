@@ -16,7 +16,7 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "3.4.1",
     "reactstrap": "^8.10.1",
-    "sweetalert2": "^11.4.6"
+    "sweetalert2": "^11.4.8"
   },
   "scripts": {
     "start": "react-scripts start",
