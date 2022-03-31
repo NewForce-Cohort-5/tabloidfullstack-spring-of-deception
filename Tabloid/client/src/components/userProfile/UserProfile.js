@@ -11,16 +11,20 @@ const UserProfile = ({ userProfileProp }) => {
     <>
       <Col sm="2">
         <Link to={`/userprofile/${userProfileProp.id}`}>
+          
           <Card className="profileCard">
+            {userProfileProp.userTypeId === 3 ? <h5 style={{color : 'red'}} >Deactivated User</h5> : <h5> <br/> </h5>}
             <CardImg top src={userProfileProp.imageLocation || "https://avatars.dicebear.com/api/bottts/.svg"} alt={userProfileProp.name} />
 
             <CardBody>
 
               User Name: {userProfileProp.displayName}<br />
-
+              
             </CardBody>
+            
           </Card>
         </Link>
+        
       </Col>
     </>
   );

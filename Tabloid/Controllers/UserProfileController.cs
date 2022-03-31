@@ -36,6 +36,13 @@ namespace Tabloid.Controllers
             return Ok(_userRepository.GetAll());
         }
 
+        // GET: UserProfileController
+        [HttpGet("GetAdmins")]
+        public ActionResult GetAdmins()
+        {
+            return Ok(_userRepository.GetAdminProfiles());
+        }
+
 
         // GET: UserProfileController
         [HttpGet("userTypes")]

@@ -10,16 +10,19 @@ import Moment from 'moment';
 
 const UserProfileDetails = () => {
 
-    const { getById, deactivateUser, reactivateUser, userProfiles } = useContext(UserProfileContext)
+    const { getById, deactivateUser, reactivateUser, userProfiles, admins, getAdmins } = useContext(UserProfileContext)
     //hook used to access the route param to get id
     const { id } = useParams();
     const navigate = useNavigate()
 
     const [userProfile, setUserProfile] = useState()
-    
+
+    let numberAdmins = admins.length
+    console.log(numberAdmins)
     //any time what's in the brackets change it will refresh useEffect (to refresh state). userProfiles is updated in the fetch call
     useEffect(() => {
-        getById(id).then(setUserProfile)
+        getAdmins()
+            .then(getById(id).then(setUserProfile))
     }, [userProfiles]);
 
     if (!userProfile) {
@@ -32,22 +35,31 @@ const UserProfileDetails = () => {
 
 
     const handleDeactivate = () => {
-        Swal.fire({
-            title: 'Are you sure you want to deactivate this user?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, deactivate it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'User Deactivated!',
-                    'Success'
-                ).then(deactivateUser(id))
-                
-            }
-        })
+        if (numberAdmins <= 1 && userProfile.userTypeId === 1 ) {
+            debugger
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You must have at least one admin before you deactivate this profile!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        } else (
+            Swal.fire({
+                title: 'Are you sure you want to deactivate this user?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, deactivate it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'User Deactivated!',
+                        'Success'
+                    ).then(deactivateUser(id))
+
+                }
+            }))
     }
 
     const handleReactivate = () => {
@@ -64,13 +76,13 @@ const UserProfileDetails = () => {
                     'User Reactivated!',
                     'Success'
                 ).then(reactivateUser(id))
-                
+
             }
         })
     }
 
-    
-    
+
+
     return (
         <CardGroup>
             <Row>
@@ -81,18 +93,18 @@ const UserProfileDetails = () => {
                         <CardBody>
                             Name: {userProfile.fullName}<br />
                             Display Name: {userProfile.displayName}<br />
-                            
+
                             User Email: {userProfile.email}<br />
                             Profile Created: {formattedDate}<br />
-                            {userProfile.userType.id === 3 ? <text style={{color: 'red'}}>User Type: {userProfile.userType.name}<br /></text> : <text>User Type: {userProfile.userType.name}<br /></text>}
+                            {userProfile.userType.id === 3 ? <text style={{ color: 'red' }}>User Type: {userProfile.userType.name}<br /></text> : <text>User Type: {userProfile.userType.name}<br /></text>}
 
                             {/* font is different color based on the type of user */}
-                            
+
                             {userProfile.userTypeId === 3 ? <Button color="warning" onClick={handleReactivate}>Reactivate User</Button> : <Button color="danger" onClick={handleDeactivate}>Deactivate User</Button>}
 
                             <Button color="primary" onClick={() => {
-                            navigate(`/userprofiles/edit/${userProfile.id}`)
-                        }}>Edit User</Button>
+                                navigate(`/userprofiles/edit/${userProfile.id}`)
+                            }}>Edit User</Button>
 
                         </CardBody>
                         <Button color="primary" onClick={() => {
@@ -104,7 +116,7 @@ const UserProfileDetails = () => {
             </Row>
         </CardGroup>
 
-        
+
     );
 };
 

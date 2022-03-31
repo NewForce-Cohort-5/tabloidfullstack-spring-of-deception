@@ -13,5 +13,6 @@ namespace Tabloid.Repositories
         public void Reactivate(int id);
         public void UpdateProfileType(UserProfile userProfile);
         public List<UserType> GetUserTypes();
+        public List<UserProfile> GetAdminProfiles();
     }
 }
