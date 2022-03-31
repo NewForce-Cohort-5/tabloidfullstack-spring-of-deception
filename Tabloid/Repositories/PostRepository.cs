@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Repositories;
@@ -171,6 +172,32 @@ namespace Tabloid.Repositories
                     reader.Close();
 
                     return posts;
+                }
+            }
+        }
+
+        public void Add(Post post)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Post (Title, Content, ImageLocation, CategoryId, UserProfileId, CreateDateTime, PublishDateTime, IsApproved)
+                        OUTPUT INSERTED.ID
+                        VALUES (@Title, @Content, @ImageLocation, @CategoryId, @UserProfileId, @CreateDateTime, @PublishDateTime, @IsApproved)";
+
+                    DbUtils.AddParameter(cmd, "@Title", post.Title);
+                    DbUtils.AddParameter(cmd, "@Content", post.Content);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
+                    DbUtils.AddParameter(cmd, "@PublishDateTime", DateTime.Now);
+                    DbUtils.AddParameter(cmd, "@IsApproved", post.IsApproved);
+
+                    post.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

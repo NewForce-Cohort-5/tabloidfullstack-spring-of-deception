@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import Post from "./Post";
+import { useNavigate } from "react-router-dom";
 import { Button } from "reactstrap";
-
 
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
+  const navigate = useNavigate();
 
   //State is for view more. slice your map to state "visible"
   //Change number in state for initial number of cards
@@ -27,6 +28,9 @@ const PostList = () => {
   // if (user.userTypeId === 1) {
   return (
     <div className="container">
+      <button id="addPost" onClick={() => {
+        navigate("/posts/add")
+    }}>Add new post</button>
       <div className="row justify-content-center">
         <h2>All Posts</h2>
         <div className="cards-column">
