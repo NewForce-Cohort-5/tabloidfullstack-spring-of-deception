@@ -35,8 +35,8 @@ const PostForm = () => {
             categoryId,
             userProfileId: +user.id
         };
-        if (post.title === "" || post.content === "") {
-            alert("Please make sure title and content are filled out");
+        if (post.title === "" || post.content === "" || post.imageLocation === "" || post.categoryId === "0") {
+            alert("Please make sure everything is filled out and you select a category");
         } else {
             addPost(post).then((p) => {
                 // Navigate the user back to the posts list
@@ -84,7 +84,7 @@ const PostForm = () => {
                                 <Label for="categoryId">Category</Label>
                                 <br />
                                 <select id="categoryId" onChange={(e) => setCategoryId(e.target.value)}>
-                                    {/* <option value="0">Select a Category</option> */}
+                                    <option value="0">Select a Category</option>
                                     {categories.map(c => (
                                         <option key={c.id} value={c.id}>
                                             {c.name}

@@ -6,6 +6,12 @@ import { Button } from "reactstrap";
 
 const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
+  const [reload, setReload] = useState();
+  
+  useEffect(() => {
+    getAllPosts();
+  }, [reload])
+  
   const navigate = useNavigate();
 
   //State is for view more. slice your map to state "visible"
@@ -19,11 +25,6 @@ const PostList = () => {
     setVisible((prevValue) => prevValue + 5)
   }
 
-  useEffect(() => {
-    getAllPosts()
-    
-  }, []);
-
   // const user = JSON.parse(sessionStorage.getItem("userProfile"))
   // if (user.userTypeId === 1) {
   return (
@@ -35,9 +36,11 @@ const PostList = () => {
         <h2>All Posts</h2>
         <div className="cards-column">
           <br />
+
           {posts.slice(0, visible).map((post) => (
-            <Post key={post.id} post={post} />
+            <Post key={post.id} post={post} reloadProp={setReload} />
           ))}
+          
           <Button
           onClick={showMorePosts}
           >View More Posts</Button>
