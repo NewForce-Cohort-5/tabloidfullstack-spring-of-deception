@@ -11,9 +11,8 @@ export function UserProfileProvider(props) {
   //user state holds list of users from API
   const [userProfiles, setUserProfiles] = useState([])
   const [userTypes, setUserTypes] = useState([])
-
   const apiUrl = "https://localhost:44360";
-
+  const [admins, setAdmins] = useState([])
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
@@ -22,9 +21,9 @@ export function UserProfileProvider(props) {
     return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
       .then((r) => r.json())
       .then((userProfile) => {
-        if(userProfile.userTypeId === 3){
+        if (userProfile.userTypeId === 3) {
           Swal.fire('Any fool can use a computer')
-        }else if (userProfile.id !==3) {
+        } else if (userProfile.id !== 3) {
           sessionStorage.setItem("userProfile", JSON.stringify(userProfile));
           setIsLoggedIn(true);
           return userProfile
@@ -58,7 +57,13 @@ export function UserProfileProvider(props) {
   const getAllUsers = () => {
     return fetch(`${apiUrl}/api/userprofile`)
       .then((res) => res.json())
-      .then(setUserProfiles);
+      .then(setUserProfiles)
+  }
+
+  const getAdmins = () => {
+    return fetch(`${apiUrl}/api/userprofile/getadmins`)
+      .then((res) => res.json())
+      .then(setAdmins)
   }
 
   const getUserTypes = () => {
@@ -92,16 +97,16 @@ export function UserProfileProvider(props) {
 
   const updateUser = user => {
     return fetch(`https://localhost:44360/api/UserProfile/${user.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(user)
     }).then(getAllUsers)
-}
+  }
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles, getById, deactivateUser, reactivateUser, updateUser, getUserTypes, userTypes }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUsers, setUserProfiles, userProfiles, getById, deactivateUser, reactivateUser, updateUser, getUserTypes, userTypes, getAdmins, admins }}>
       {props.children}
     </UserProfileContext.Provider>
   );

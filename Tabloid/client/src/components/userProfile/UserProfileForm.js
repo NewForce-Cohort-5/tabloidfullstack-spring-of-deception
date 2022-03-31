@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from "react"
 import { UserProfileContext } from "../../providers/UserProfileProvider"
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
+import Swal from 'sweetalert2';
+
 
 
 export const UserProfileForm = () => {
-    const { getById, updateUser, userProfiles, getUserTypes, userTypes } = useContext(UserProfileContext)
+    const { getById, updateUser, userProfiles, getUserTypes, userTypes, admins, getAdmins } = useContext(UserProfileContext)
     const navigate = useNavigate()
-
+    let numberAdmins = admins.length
     const [userProfile, setUserProfile] = useState({})
 
     //wait for data before button is active
@@ -15,12 +17,15 @@ export const UserProfileForm = () => {
 
     const { id } = useParams()
 
+
+    //get logged in local storage userTypeId
+    const userId = JSON.parse(sessionStorage.getItem("userProfile")).userTypeId
     //any time what's in the brackets change it will refresh useEffect (to refresh state). userProfiles is updated in the fetch call
     useEffect(() => {
-
         getById(id)
             .then(setUserProfile)
             .then(getUserTypes)
+            .then(getAdmins)
 
     }, [userProfiles]);
 
@@ -38,18 +43,29 @@ export const UserProfileForm = () => {
 
     //Saves/updates user profiles
     //Make sure to add the e.preventDefault
+    //has conditional to not allow all admins to be removed
     const handleSaveProfile = (e) => {
         e.preventDefault()
-        updateUser({
-            id: userProfile.id,
-            displayName: userProfile.displayName,
-            firstName: userProfile.firstName,
-            lastName: userProfile.lastName,
-            email: userProfile.email,
-            imageLocation: userProfile.imageLocation,
-            userTypeId: userProfile.userTypeId
-        })
-            .then(() => navigate(`/userprofile/${userProfile.id}`))
+        if (numberAdmins <= 1 && userProfile.userTypeId != 1 && userId !==1) {
+            debugger
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You need at least one admin! Make someone admin before changing user type!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })
+        } else (
+
+            updateUser({
+                id: userProfile.id,
+                displayName: userProfile.displayName,
+                firstName: userProfile.firstName,
+                lastName: userProfile.lastName,
+                email: userProfile.email,
+                imageLocation: userProfile.imageLocation,
+                userTypeId: userProfile.userTypeId
+            })
+                .then(() => navigate(`/userprofile/${userProfile.id}`)))
     }
 
     return (
