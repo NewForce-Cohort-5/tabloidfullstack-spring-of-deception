@@ -38,9 +38,9 @@ const PostList = () => {
           <br />
 
           {posts.slice(0, visible).map((post) => (
-            <Post key={post.id} post={post} />
-
+            <Post key={post.id} post={post} reloadProp={setReload} />
           ))}
+          
           <Button
           onClick={showMorePosts}
           >View More Posts</Button>
